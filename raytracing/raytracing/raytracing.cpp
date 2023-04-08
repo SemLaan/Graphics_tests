@@ -5,6 +5,7 @@
 
 #include "RayMath/hitablelist.h"
 #include "RayMath/sphere.h"
+#include "RayMath/camera.h"
 
 
 vec3 Color(const Ray& r, Hitable* scene) {
@@ -28,13 +29,7 @@ int main()
     // Opening the image file and outputing the file settings into it
     std::ofstream imageFile;
     imageFile.open("Image.ppm");
-    imageFile << "P3\n" << nx << " " << ny << "\n255\n";
-
-    // Defining the camera?
-    vec3 lowerLeftCorner(-2.0, -1.0, -1.0);
-    vec3 horizontal(4.0, 0.0, 0.0);
-    vec3 vertical(0.0, 2.0, 0.0);
-    vec3 origin(0.0, 0.0, 0.0);
+    imageFile << "P3\n" << nx << " " << ny << "\n255\n";    
 
     // Defining the scene
     const int objectCount = 2;
@@ -43,6 +38,9 @@ int main()
     list[1] = new Sphere(vec3(0, -100.5, -1), 100);
     Hitable* scene = new HitableList(list, objectCount);
 
+    // Defining the camera
+    Camera cam;
+    
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
     for (int j = ny - 1; j >= 0; j--)
@@ -52,7 +50,7 @@ int main()
             float u = float(i) / float(nx);
             float v = float(j) / float(ny);
 
-            Ray r(origin, lowerLeftCorner + u * horizontal + v * vertical);
+            Ray r = cam.GetRay(u, v);
 
             vec3 color = Color(r, scene);
             int ir = int(255.99 * color[0]);

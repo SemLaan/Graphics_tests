@@ -133,6 +133,7 @@
     <None Include="Image.ppm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RayMath\camera.h" />
     <ClInclude Include="RayMath\hitable.h" />
     <ClInclude Include="RayMath\hitablelist.h" />
     <ClInclude Include="RayMath\ray.h" />
