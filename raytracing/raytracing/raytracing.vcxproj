@@ -133,7 +133,11 @@
     <None Include="Image.ppm" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vec3.h" />
+    <ClInclude Include="RayMath\hitable.h" />
+    <ClInclude Include="RayMath\hitablelist.h" />
+    <ClInclude Include="RayMath\ray.h" />
+    <ClInclude Include="RayMath\sphere.h" />
+    <ClInclude Include="RayMath\vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
