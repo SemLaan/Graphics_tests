@@ -56,5 +56,8 @@
     <ClInclude Include="RayMath\dielectric.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RayMath\blackhole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
