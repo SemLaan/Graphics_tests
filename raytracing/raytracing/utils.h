@@ -1,6 +1,14 @@
 #pragma once
 #include "RayMath/vec3.h"
 
+vec3 RandomInUnitDisk() {
+    vec3 p;
+    do {
+        p = 2.0 * vec3(((double)rand()) / RAND_MAX, ((double)rand()) / RAND_MAX, 0) - vec3(1, 1, 0);
+    } while (Dot(p, p) >= 1.0);
+    return p;
+}
+
 float Schlick(float cosine, float ref_idx) {
     float r0 = (1 - ref_idx) / (1 + ref_idx);
     r0 = r0 * r0;
