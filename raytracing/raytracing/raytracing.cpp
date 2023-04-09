@@ -6,12 +6,25 @@
 #include "RayMath/hitablelist.h"
 #include "RayMath/sphere.h"
 #include "RayMath/camera.h"
+#include "utils.h"
+#include "RayMath/material.h"
+#include "RayMath/metal.h"
+#include "RayMath/lambertian.h"
+#include "RayMath/dielectric.h"
 
 
-vec3 Color(const Ray& r, Hitable* scene) {
+
+vec3 Color(const Ray& r, Hitable* scene, int depth) {
     HitRecord record;
-    if (scene->Hit(r, 0.0, FLT_MAX, record)) {
-        return 0.5 * vec3(record.normal.x() + 1, record.normal.y() + 1, record.normal.z() + 1);
+    if (scene->Hit(r, 0.001, FLT_MAX, record)) {
+        Ray scattered;
+        vec3 attenuation;
+        if (depth < 50 && record.matPtr->Scatter(r, record, attenuation, scattered)) {
+            return attenuation * Color(scattered, scene, depth + 1);
+        }
+        else {
+            return vec3(0, 0, 0);
+        }
     }
     else {
         vec3 unitDirection = UnitVector(r.Direction());
@@ -23,8 +36,9 @@ vec3 Color(const Ray& r, Hitable* scene) {
 
 int main()
 {
-    int nx = 200;
-    int ny = 100;
+    int nx = 600; // width of the image
+    int ny = 300; // height of the image
+    int ns = 100; // samples per pixel
 
     // Opening the image file and outputing the file settings into it
     std::ofstream imageFile;
@@ -32,10 +46,14 @@ int main()
     imageFile << "P3\n" << nx << " " << ny << "\n255\n";    
 
     // Defining the scene
-    const int objectCount = 2;
+    const int objectCount = 4;
     Hitable* list[objectCount];
-    list[0] = new Sphere(vec3(0, 0, -1), 0.5);
-    list[1] = new Sphere(vec3(0, -100.5, -1), 100);
+    list[0] = new Sphere(vec3(0, 0, -1), 0.5, new Lambertian(vec3(0.8, 0.3, 0.3)));
+    list[1] = new Sphere(vec3(0, -100.5, -1), 100, new Lambertian(vec3(0.8, 0.8, 0.0)));
+    list[2] = new Sphere(vec3(1, 0, -1), 0.5, new Metal(vec3(0.8, 0.6, 0.2), 0.1));
+    list[3] = new Sphere(vec3(-1, 0, -1), 0.5, new Dielectric(1.5));
+    //list[4] = new Sphere(vec3(-1, 0, -1), -0.45, new Dielectric(1.5));
+
     Hitable* scene = new HitableList(list, objectCount);
 
     // Defining the camera
@@ -45,14 +63,22 @@ int main()
 
     for (int j = ny - 1; j >= 0; j--)
     {
+        if (j%10 == 0)
+            std::cout << "progress: " << 1-(float)j/ny << std::endl;
         for (int i = 0; i < nx; i++)
         {
-            float u = float(i) / float(nx);
-            float v = float(j) / float(ny);
+            vec3 color(0, 0, 0);
+            for (int s = 0; s < ns; s++) {
+                float u = float(i + (((double)rand()) / RAND_MAX)) / float(nx);
+                float v = float(j + (((double)rand()) / RAND_MAX)) / float(ny);
 
-            Ray r = cam.GetRay(u, v);
+                Ray r = cam.GetRay(u, v);
 
-            vec3 color = Color(r, scene);
+                color += Color(r, scene, 0);
+            }
+            
+            color /= float(ns);
+            color = vec3(sqrt(color[0]), sqrt(color[1]), sqrt(color[2]));
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);

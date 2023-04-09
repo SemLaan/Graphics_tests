@@ -41,5 +41,20 @@
     <ClInclude Include="RayMath\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RayMath\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayMath\lambertian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayMath\metal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayMath\dielectric.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
