@@ -36,8 +36,8 @@ vec3 Color(const Ray& r, Hitable* scene, int depth) {
 
 int main()
 {
-    int nx = 200; // width of the image
-    int ny = 100; // height of the image
+    int nx = 600; // width of the image
+    int ny = 300; // height of the image
     int ns = 100; // samples per pixel
 
     // Opening the image file and outputing the file settings into it
@@ -57,7 +57,7 @@ int main()
     Hitable* scene = new HitableList(list, objectCount);
 
     // Defining the camera
-    Camera cam(90, float(nx)/float(ny));
+    Camera cam(vec3(-2, 2, 1), vec3(0, 0, -1), vec3(0, 1, 0), 90, float(nx) / float(ny));
     
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
