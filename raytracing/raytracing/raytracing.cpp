@@ -33,11 +33,43 @@ vec3 Color(const Ray& r, Hitable* scene, int depth) {
     }
 }
 
+Hitable* RandomScene() {
+    int n = 500;
+    Hitable** list = new Hitable * [n + 1];
+    list[0] = new Sphere(vec3(0, -1000, 0), 1000, new Lambertian(vec3(0.5, 0.5, 0.5)));
+    int i = 1;
+    for (int a = -11; a < 11; a++) {
+        for (int b = -11; b < 11; b++) {
+            float chooseMat = Random();
+            vec3 center(a + 0.9 * Random(), 0.2, b + 0.9 * Random());
+            if ((center - vec3(4, 0.2, 0)).Length() > 0.9) {
+                if (chooseMat < 0.8) { // diffuse
+                    list[i++] = new Sphere(center, 0.2, 
+                                new Lambertian(vec3(Random() * Random(), Random() * Random(), Random() * Random())));
+                }
+                else if (chooseMat < 0.95) { // metal
+                    list[i++] = new Sphere(center, 0.2,
+                        new Metal(vec3(0.5 * (1 + Random()), 0.5 * (1 + Random()), 0.5 * (1 + Random())), 0.5 * (1 + Random())));
+                }
+                else { // glass
+                    list[i++] = new Sphere(center, 0.2, new Dielectric(1.5));
+                }
+            }
+        }
+    }
+
+    list[i++] = new Sphere(vec3(0, 1, 0), 1.0, new Dielectric(1.5));
+    list[i++] = new Sphere(vec3(-4, 1, 0), 1.0, new Lambertian(vec3(0.4, 0.2, 0.1)));
+    list[i++] = new Sphere(vec3(4, 1, 0), 1.0, new Metal(vec3(0.7, 0.6, 0.5), 0));
+
+    return new HitableList(list, i);
+}
+
 
 int main()
 {
-    int nx = 200; // width of the image
-    int ny = 100; // height of the image
+    int nx = 1000; // width of the image
+    int ny = 500; // height of the image
     int ns = 100; // samples per pixel
 
     // Opening the image file and outputing the file settings into it
@@ -46,23 +78,16 @@ int main()
     imageFile << "P3\n" << nx << " " << ny << "\n255\n";    
 
     // Defining the scene
-    const int objectCount = 4;
-    Hitable* list[objectCount];
-    list[0] = new Sphere(vec3(0, 0, -1), 0.5, new Lambertian(vec3(0.8, 0.3, 0.3)));
-    list[1] = new Sphere(vec3(0, -100.5, -1), 100, new Lambertian(vec3(0.8, 0.8, 0.0)));
-    list[2] = new Sphere(vec3(1, 0, -1), 0.5, new Metal(vec3(0.8, 0.6, 0.2), 0.1));
-    list[3] = new Sphere(vec3(-1, 0, -1), 0.5, new Dielectric(1.5));
-    //list[4] = new Sphere(vec3(-1, 0, -1), -0.45, new Dielectric(1.5));
-
-    Hitable* scene = new HitableList(list, objectCount);
+    Hitable* scene = RandomScene();
 
     // Defining the camera
-    vec3 lookFrom(3, 3, 2);
+    vec3 lookFrom(8, 2, 2);
     vec3 lookAt(0, 0, -1);
     float distanceToFocus = (lookFrom - lookAt).Length();
-    float aperture = 0.5;
-    Camera cam(lookFrom, lookAt, vec3(0, 1, 0), 20, float(nx) / float(ny), aperture, distanceToFocus);
+    float aperture = 0.1;
+    Camera cam(lookFrom, lookAt, vec3(0, 1, 0), 35, float(nx) / float(ny), aperture, distanceToFocus);
     
+    std::cout << "starting" << std::endl;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
     for (int j = ny - 1; j >= 0; j--)

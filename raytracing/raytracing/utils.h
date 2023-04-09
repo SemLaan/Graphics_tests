@@ -1,6 +1,10 @@
 #pragma once
 #include "RayMath/vec3.h"
 
+float Random() {
+    return ((double)rand()) / RAND_MAX;
+}
+
 vec3 RandomInUnitDisk() {
     vec3 p;
     do {
