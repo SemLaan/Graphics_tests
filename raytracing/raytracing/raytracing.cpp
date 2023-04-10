@@ -3,6 +3,7 @@
 #include "cfloat"
 #include <chrono>
 #include <stb/stb_image_write.h>
+#include <gmtl/gmtl.h>
 
 #include "RayMath/hitablelist.h"
 #include "RayMath/sphere.h"
