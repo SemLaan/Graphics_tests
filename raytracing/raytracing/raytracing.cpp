@@ -2,6 +2,7 @@
 #include <fstream>
 #include "cfloat"
 #include <chrono>
+#include <stb/stb_image_write.h>
 
 #include "RayMath/hitablelist.h"
 #include "RayMath/sphere.h"
@@ -73,8 +74,8 @@ Hitable* RandomScene() {
 
 int main()
 {
-    int nx = 600; // width of the image
-    int ny = 300; // height of the image
+    int nx = 200; // width of the image
+    int ny = 100; // height of the image
     int ns = 100; // samples per pixel
 
     // Opening the image file and outputing the file settings into it
@@ -85,17 +86,17 @@ int main()
     // Defining the scene
     const int objectCount = 4;
     Hitable* list[objectCount];
-    list[0] = new Sphere(vec3(0, 0.3, -1), 0.5, new BlackHole(0.09, 0.5, 1000, 0.01, 0.0012));
+    list[0] = new Sphere(vec3(0, 0.3, -1), 0.5, new BlackHole(0.00, 0.5, 1000, 0.01, 0.0012));
     list[1] = new Sphere(vec3(0, -100.5, -1), 100, new Lambertian(vec3(0.8, 0.8, 0.0)));
     list[2] = new Sphere(vec3(1, 0, -1), 0.5, new Metal(vec3(0.8, 0.6, 0.2), 0.1));
     list[3] = new Sphere(vec3(-1, 0, -1), 0.5, new Dielectric(1.5));
 
-    //Hitable* scene = new HitableList(list, objectCount);
-    Hitable* scene = RandomScene();
+    Hitable* scene = new HitableList(list, objectCount);
+    //Hitable* scene = RandomScene();
 
     // Defining the camera
-    vec3 lookFrom(8, 2, 2);
-    //vec3 lookFrom(2, 2, 2);
+    //vec3 lookFrom(8, 2, 2);
+    vec3 lookFrom(2, 2, 2);
     vec3 lookAt(0, 0, -1);
     float distanceToFocus = (lookFrom - lookAt).Length();
     float aperture = 0.0;
