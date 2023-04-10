@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)raytracing\Linking\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)raytracing\Linking\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,12 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Linking\lib\stb.cpp" />
     <ClCompile Include="raytracing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Image.ppm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Linking\include\stb\stb_image_write.h" />
     <ClInclude Include="RayMath\blackhole.h" />
     <ClInclude Include="RayMath\camera.h" />
     <ClInclude Include="RayMath\dielectric.h" />
@@ -145,6 +149,9 @@
     <ClInclude Include="RayMath\sphere.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="RayMath\vec3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -78,10 +78,9 @@ int main()
     int ny = 100; // height of the image
     int ns = 100; // samples per pixel
 
-    // Opening the image file and outputing the file settings into it
-    std::ofstream imageFile;
-    imageFile.open("Image.ppm");
-    imageFile << "P3\n" << nx << " " << ny << "\n255\n";    
+    // Setup array for image data
+    int numChannels = 4; // RGBA
+    unsigned char* imageData = new unsigned char[nx * ny * numChannels];
 
     // Defining the scene
     const int objectCount = 4;
@@ -105,10 +104,10 @@ int main()
     std::cout << "starting" << std::endl;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-    for (int j = ny - 1; j >= 0; j--)
+    for (int j = 0; j < ny; j++)
     {
         if (j%10 == 0)
-            std::cout << "progress: " << 1-(float)j/ny << std::endl;
+            std::cout << "progress: " << (float)j/ny << std::endl;
         for (int i = 0; i < nx; i++)
         {
             vec3 color(0, 0, 0);
@@ -126,7 +125,13 @@ int main()
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
-            imageFile << ir << " " << ig << " " << ib << "\n";
+            // Write color data into array
+            int index = ((ny-j) * nx + i) * numChannels;
+            imageData[index + 0] = ir; // R
+            imageData[index + 1] = ig; // G
+            imageData[index + 2] = ib; // B
+            imageData[index + 3] = 255; // A
+            //imageFile << ir << " " << ig << " " << ib << "\n";
         }
     }
 
@@ -134,5 +139,6 @@ int main()
     std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[miliseconds]" << std::endl;
     std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "[seconds]" << std::endl;
 
-    imageFile.close();
+    // write image to png file
+    stbi_write_png("image.png", nx, ny, numChannels, imageData, nx * numChannels);
 }

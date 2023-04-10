@@ -18,6 +18,9 @@
     <ClCompile Include="raytracing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Linking\lib\stb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Image.ppm" />
@@ -59,5 +62,13 @@
     <ClInclude Include="RayMath\blackhole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Linking\include\stb\stb_image_write.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

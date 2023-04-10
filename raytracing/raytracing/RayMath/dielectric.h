@@ -22,7 +22,7 @@ public:
 		}
 		else {
 			outwardNormal = record.normal;
-			ni_over_nt = 1.0 / ref_idx;
+			ni_over_nt = 1.0f / ref_idx;
 			cosine = -Dot(r_in.Direction(), record.normal) / r_in.Direction().Length();
 		}
 		if (Refract(r_in.Direction(), outwardNormal, ni_over_nt, refracted)) {
