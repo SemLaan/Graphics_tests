@@ -6,8 +6,8 @@ class Material;
 
 struct HitRecord {
 	float t;
-	vec3 p;
-	vec3 normal;
+	Eigen::Vector3f p;
+	Eigen::Vector3f normal;
 	Material* matPtr;
 };
 

@@ -26,9 +26,6 @@
     <None Include="Image.ppm" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RayMath\vec3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RayMath\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>

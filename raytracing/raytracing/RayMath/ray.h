@@ -1,17 +1,16 @@
 #pragma once
-
-#include "vec3.h"
+#include <Eigen/Dense>
 
 class Ray 
 {
 public:
-	vec3 A;
-	vec3 B;
+	Eigen::Vector3f A;
+	Eigen::Vector3f B;
 	
 	Ray() {}
-	Ray(const vec3& a, const vec3& b) { A = a; B = b; }
+	Ray(const Eigen::Vector3f& a, const Eigen::Vector3f& b) { A = a; B = b; }
 
-	vec3 Origin() const { return A; }
-	vec3 Direction() const { return B; }
-	vec3 PointAtParameter(float t) const { return A + t * B; }
+	Eigen::Vector3f Origin() const { return A; }
+	Eigen::Vector3f Direction() const { return B; }
+	Eigen::Vector3f PointAtParameter(float t) const { return A + t * B; }
 };

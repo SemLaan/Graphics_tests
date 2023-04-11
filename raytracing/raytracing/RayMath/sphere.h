@@ -5,21 +5,21 @@
 
 class Sphere : public Hitable {
 public:
-	vec3 center;
+    Eigen::Vector3f center;
 	float radius;
     Material* matPtr;
 
 	Sphere() {}
-	Sphere(vec3 cen, float r, Material* mat) : center(cen), radius(r), matPtr(mat) {};
+	Sphere(Eigen::Vector3f cen, float r, Material* mat) : center(cen), radius(r), matPtr(mat) {};
 	virtual bool Hit(const Ray& r, float t_min, float t_max, HitRecord& record) const;
 };
 
 bool Sphere::Hit(const Ray& r, float t_min, float t_max, HitRecord& record) const {
     // ABC formula to determine whether the given ray intersects the given sphere
-    vec3 oc = r.Origin() - center;
-    float a = Dot(r.Direction(), r.Direction());
-    float b = Dot(oc, r.Direction());
-    float c = Dot(oc, oc) - radius * radius;
+    Eigen::Vector3f oc = r.Origin() - center;
+    float a = r.Direction().dot(r.Direction());
+    float b = oc.dot(r.Direction());
+    float c = oc.dot(oc) - radius * radius;
     float discriminant = b * b - a * c;
 
     // If there is a collision 
