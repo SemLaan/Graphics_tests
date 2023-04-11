@@ -3,7 +3,8 @@
 #include "cfloat"
 #include <chrono>
 #include <stb/stb_image_write.h>
-#include <gmtl/gmtl.h>
+
+//#include <gmtl/gmtl.h>
 
 #include "RayMath/hitablelist.h"
 #include "RayMath/sphere.h"
@@ -38,7 +39,7 @@ vec3 Color(const Ray& r, Hitable* scene, int depth) {
 
 Hitable* RandomScene() {
     int n = 500;
-    Hitable** list = new Hitable * [n + 1];
+    Hitable** list = new Hitable*[n + 1];
     list[0] = new Sphere(vec3(0, -1000, 0), 1000, new Lambertian(vec3(0.5, 0.5, 0.5)));
     int i = 1;
     for (int a = -11; a < 11; a++) {
@@ -91,12 +92,12 @@ int main()
     list[2] = new Sphere(vec3(1, 0, -1), 0.5, new Metal(vec3(0.8, 0.6, 0.2), 0.1));
     list[3] = new Sphere(vec3(-1, 0, -1), 0.5, new Dielectric(1.5));
 
-    Hitable* scene = new HitableList(list, objectCount);
-    //Hitable* scene = RandomScene();
+    //Hitable* scene = new HitableList(list, objectCount);
+    Hitable* scene = RandomScene();
 
     // Defining the camera
-    //vec3 lookFrom(8, 2, 2);
-    vec3 lookFrom(2, 2, 2);
+    vec3 lookFrom(8, 2, 2);
+    //vec3 lookFrom(2, 2, 2);
     vec3 lookAt(0, 0, -1);
     float distanceToFocus = (lookFrom - lookAt).Length();
     float aperture = 0.0;
@@ -127,12 +128,11 @@ int main()
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
             // Write color data into array
-            int index = ((ny-j) * nx + i) * numChannels;
-            imageData[index + 0] = ir; // R
-            imageData[index + 1] = ig; // G
-            imageData[index + 2] = ib; // B
-            imageData[index + 3] = 255; // A
-            //imageFile << ir << " " << ig << " " << ib << "\n";
+            int index = ((ny-j-1) * nx + i) * numChannels;
+            imageData[index + 0] = unsigned char(ir); // R
+            imageData[index + 1] = unsigned char(ig); // G
+            imageData[index + 2] = unsigned char(ib); // B
+            imageData[index + 3] = unsigned char(255); // A
         }
     }
 
