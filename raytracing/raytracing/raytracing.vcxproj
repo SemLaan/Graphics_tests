@@ -146,6 +146,7 @@
     <ClInclude Include="RayMath\material.h" />
     <ClInclude Include="RayMath\metal.h" />
     <ClInclude Include="RayMath\ray.h" />
+    <ClInclude Include="RayMath\raytracer.h" />
     <ClInclude Include="RayMath\sphere.h" />
     <ClInclude Include="scenes.h" />
     <ClInclude Include="utils.h" />

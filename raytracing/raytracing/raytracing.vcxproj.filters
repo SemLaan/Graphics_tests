@@ -65,6 +65,9 @@
     <ClInclude Include="scenes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RayMath\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="image.png">
