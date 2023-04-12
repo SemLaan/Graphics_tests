@@ -14,6 +14,7 @@ public:
 	Eigen::Vector3f u, v, w;
 	float lensRadius;
 
+	Camera() {}
 	/// <summary>
 	/// Makes a camera
 	/// </summary>
