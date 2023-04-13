@@ -24,7 +24,7 @@ public:
 		lensRadius = aperture / 2;
 
 		// vertical fov in radians
-		float theta = verticalFov * M_PI / 180;
+		float theta = verticalFov * (float)M_PI / 180;
 		float halfHeight = tan(theta / 2);
 		float halfWidth = aspect * halfHeight;
 

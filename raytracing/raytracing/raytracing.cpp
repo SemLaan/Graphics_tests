@@ -59,9 +59,9 @@ int main()
     if (numThreads > maxThreads)
         numThreads = maxThreads;
 
-    int nx = 400; // width of the image
-    int ny = 200; // height of the image
-    int ns = 100; // samples per pixel
+    int nx = 600; // width of the image
+    int ny = 300; // height of the image
+    int ns = 200; // samples per pixel
 
     // Setup array for image data
     int numChannels = 4; // RGBA
@@ -76,10 +76,10 @@ int main()
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
     int nyStart = 0;
-    for (int i = 0; i < numThreads; i++)
+    for (unsigned int i = 0; i < numThreads; i++)
     {
-        int rowsForThisThread = std::floor(ny / (numThreads + 1));
-        int excessRows = ny % (numThreads + 1);
+        int rowsForThisThread = (int)std::floor(ny / (numThreads + 1));
+        unsigned int excessRows = ny % (numThreads + 1);
         if (i < excessRows)
             rowsForThisThread++;
         int nyEnd = nyStart + rowsForThisThread;
@@ -91,7 +91,7 @@ int main()
     std::cout << "rows for this thread: " << ny - nyStart << std::endl;
     Render(nx, nyStart, ny, ny, ns, numChannels, &cam, scene, imageData, true);
 
-    for (int i = 0; i < numThreads; i++)
+    for (unsigned int i = 0; i < numThreads; i++)
     {
         threadPool[i]->join();
     }

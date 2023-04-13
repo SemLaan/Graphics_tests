@@ -6,7 +6,7 @@
 
 Eigen::Vector3f TraceRay(const Ray& r, Hitable* scene, int depth) {
     HitRecord record;
-    if (scene->Hit(r, 0.001, FLT_MAX, record)) {
+    if (scene->Hit(r, 0.001f, FLT_MAX, record)) {
         Ray scattered;
         Eigen::Vector3f attenuation;
         if (depth < 50 && record.matPtr->Scatter(r, record, attenuation, scattered)) {

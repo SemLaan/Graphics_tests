@@ -13,10 +13,19 @@ Eigen::Vector3f RandomInUnitDisk() {
     return p;
 }
 
+
+Eigen::Vector3f RandomOnHorizontalUnitCircle() {
+    Eigen::Vector3f p;
+    do {
+        p = 2.0f * Eigen::Vector3f(((float)rand()) / RAND_MAX, 0, ((float)rand()) / RAND_MAX) - Eigen::Vector3f(1, 0, 1);
+    } while (p.dot(p) >= 1.0);
+    return p.normalized();
+}
+
 float Schlick(float cosine, float ref_idx) {
     float r0 = (1 - ref_idx) / (1 + ref_idx);
     r0 = r0 * r0;
-    return r0 + (1 - r0) * pow((1 - cosine), 5);
+    return r0 + (1 - r0) * (float)pow((1 - cosine), 5);
 }
 
 bool Refract(const Eigen::Vector3f& v, const Eigen::Vector3f& n, float ni_over_nt, Eigen::Vector3f& refracted) {
