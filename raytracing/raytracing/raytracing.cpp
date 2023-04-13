@@ -70,24 +70,28 @@ int main()
     Hitable* scene = RandomScene(cam, nx, ny);
 
     unsigned char* imageData = new unsigned char[nx * ny * numChannels];
-    std::thread** threadPool = new std::thread*[numThreads-1];
+    std::thread** threadPool = new std::thread*[numThreads];
     
     std::cout << "starting with " << numThreads << " threads" << std::endl;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
-    for (int i = 0; i < numThreads-1; i++)
+    int nyStart = 0;
+    for (int i = 0; i < numThreads; i++)
     {
-        int rowsPerThread = std::floor(ny / numThreads);
-        int nyStart = rowsPerThread * i;
-        int nyEnd = rowsPerThread * (i + 1);
+        int rowsForThisThread = std::floor(ny / (numThreads + 1));
+        int excessRows = ny % (numThreads + 1);
+        if (i < excessRows)
+            rowsForThisThread++;
+        int nyEnd = nyStart + rowsForThisThread;
+        std::cout << "rows for this thread: " << nyEnd - nyStart << std::endl;
         threadPool[i] = new std::thread(Render, nx, nyStart, nyEnd, ny, ns, numChannels, &cam, scene, imageData, false);
+        nyStart += rowsForThisThread;
     }
 
-    int rowsPerThread = std::floor(ny / numThreads);
-    int nyStart = rowsPerThread * (numThreads - 1);
+    std::cout << "rows for this thread: " << ny - nyStart << std::endl;
     Render(nx, nyStart, ny, ny, ns, numChannels, &cam, scene, imageData, true);
 
-    for (int i = 0; i < numThreads - 1; i++)
+    for (int i = 0; i < numThreads; i++)
     {
         threadPool[i]->join();
     }
