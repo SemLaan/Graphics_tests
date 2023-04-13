@@ -2,13 +2,13 @@
 #include "Eigen/Dense"
 
 float Random() {
-    return ((double)rand()) / RAND_MAX;
+    return ((float)rand()) / RAND_MAX;
 }
 
 Eigen::Vector3f RandomInUnitDisk() {
     Eigen::Vector3f p;
     do {
-        p = 2.0f * Eigen::Vector3f(((double)rand()) / RAND_MAX, ((double)rand()) / RAND_MAX, 0) - Eigen::Vector3f(1, 1, 0);
+        p = 2.0f * Eigen::Vector3f(((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX, 0) - Eigen::Vector3f(1, 1, 0);
     } while (p.dot(p) >= 1.0);
     return p;
 }
@@ -38,7 +38,7 @@ Eigen::Vector3f Reflect(const Eigen::Vector3f& v, const Eigen::Vector3f& n) {
 Eigen::Vector3f RandomInUnitSphere() {
     Eigen::Vector3f p;
     do {
-        p = 2.0f * Eigen::Vector3f(((double)rand()) / RAND_MAX, ((double)rand()) / RAND_MAX, ((double)rand()) / RAND_MAX) - Eigen::Vector3f(1, 1, 1);
+        p = 2.0f * Eigen::Vector3f(((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX) - Eigen::Vector3f(1, 1, 1);
     } while (p.squaredNorm() >= 1.0);
     return p;
 }
