@@ -2,6 +2,10 @@
 #include "raytracing/raytracinginclude.h"
 #include "utils/scenes.h"
 
+#include <iostream>
+#include <thread>
+
+
 
 #define TEXTURE_CHANNELS 4U
 
