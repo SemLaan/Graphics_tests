@@ -56,7 +56,7 @@ Hitable* RandomScene(Camera& cam, int nx, int ny) {
                 }
                 else if (chooseMat < 0.95) { // metal
                     list[i++] = new Sphere(center, 0.2,
-                        new Metal(Eigen::Vector3f(0.5 * ((double)1 + Random()), 0.5 * ((double)1 + Random()), 0.5 * ((double)1 + Random())), 0.5 * ((double)1 + Random())));
+                        new Metal(Eigen::Vector3f(0.5 * (1 + Random()), 0.5 * (1 + Random()), 0.5 * (1 + Random())), 0.5 * (1 + Random())));
                 }
                 else { // glass
                     list[i++] = new Sphere(center, 0.2, new Dielectric(1.5));
@@ -66,11 +66,11 @@ Hitable* RandomScene(Camera& cam, int nx, int ny) {
     }
     list[i++] = new Sphere(Eigen::Vector3f(0, 1, 0), 1.0, new Metal(Eigen::Vector3f(0.7, 0.6, 0.5), 0));
     list[i++] = new Sphere(Eigen::Vector3f(-4, 1, 0), 1.0, new Lambertian(Eigen::Vector3f(0.4, 0.2, 0.1)));
-    float blackHoleSize = 2.f;
-    list[i++] = new Sphere(Eigen::Vector3f(1, 5, 0), blackHoleSize, new BlackHole(0.09, blackHoleSize, 1000, 0.01, 0.0008));
+    float blackHoleSize = 1.0f;
+    list[i++] = new Sphere(Eigen::Vector3f(4, 1.5, 0), blackHoleSize, new BlackHole(0.09, blackHoleSize, 1000, 0.01, 0.0008));
 
     // Defining the camera
-    Eigen::Vector3f lookFrom(2, 8, 2);
+    Eigen::Vector3f lookFrom(8, 2, 2);
     Eigen::Vector3f lookAt(0, 0, -1);
     float distanceToFocus = (lookFrom - lookAt).norm();
     float aperture = 0.0;
