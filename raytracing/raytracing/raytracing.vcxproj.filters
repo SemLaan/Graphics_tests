@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="raytracing.cpp">
+    <ClCompile Include="src\application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Linking\lib\stb.cpp">
@@ -23,49 +23,52 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image.ppm" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="RayMath\ray.h">
+    <ClInclude Include="src\raytracing\raymath\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\hitable.h">
+    <ClInclude Include="src\raytracing\hitables\hitable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\sphere.h">
+    <ClInclude Include="src\raytracing\hitables\sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\hitablelist.h">
+    <ClInclude Include="src\raytracing\hitables\hitablelist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\camera.h">
+    <ClInclude Include="src\raytracing\raymath\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\material.h">
+    <ClInclude Include="src\raytracing\materials\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\lambertian.h">
+    <ClInclude Include="src\raytracing\materials\lambertian.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="src\utils\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\metal.h">
+    <ClInclude Include="src\raytracing\materials\metal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\dielectric.h">
+    <ClInclude Include="src\raytracing\materials\dielectric.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\blackhole.h">
+    <ClInclude Include="src\raytracing\materials\blackhole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Linking\include\stb\stb_image_write.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scenes.h">
+    <ClInclude Include="src\utils\scenes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RayMath\raytracer.h">
+    <ClInclude Include="src\raytracing\raymath\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raytracing\raytracinginclude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raytracing\raytracingrenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

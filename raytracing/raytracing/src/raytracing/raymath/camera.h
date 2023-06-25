@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../utils.h"
+#include "utils/utils.h"
 #include "ray.h"
 #include <corecrt_math_defines.h>
 
@@ -14,7 +14,8 @@ public:
 	Eigen::Vector3f u, v, w;
 	float lensRadius;
 
-	Camera() {}
+	Camera() = default;
+
 	/// <summary>
 	/// Makes a camera
 	/// </summary>

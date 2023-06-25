@@ -7,7 +7,7 @@ public:
 	Hitable** list;
 	int listSize;
 
-	HitableList() {}
+	HitableList() = default;
 	HitableList(Hitable** l, int n) { list = l; listSize = n; }
 	virtual bool Hit(const Ray& r, float t_min, float t_max, HitRecord& record) const;
 };

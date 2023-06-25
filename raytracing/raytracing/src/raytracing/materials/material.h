@@ -1,6 +1,6 @@
 #pragma once
-#include "ray.h"
-#include "hitable.h"
+#include "raytracing/raymath/ray.h"
+#include "raytracing/hitables/hitable.h"
 
 class Material {
 public:

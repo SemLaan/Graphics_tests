@@ -1,6 +1,6 @@
 #pragma once
 #include "material.h"
-#include "../utils.h"
+#include "utils/utils.h"
 
 class Metal : public Material {
 public:

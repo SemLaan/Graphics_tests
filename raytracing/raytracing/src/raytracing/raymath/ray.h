@@ -7,7 +7,7 @@ public:
 	Eigen::Vector3f A;
 	Eigen::Vector3f B;
 	
-	Ray() {}
+	Ray() = default;
 	Ray(const Eigen::Vector3f& a, const Eigen::Vector3f& b) { A = a; B = b; }
 
 	Eigen::Vector3f Origin() const { return A; }

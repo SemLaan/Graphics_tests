@@ -1,7 +1,7 @@
 #pragma once
 #include "ray.h"
-#include "hitablelist.h"
-#include "material.h"
+#include "raytracing/hitables/hitablelist.h"
+#include "raytracing/materials/material.h"
 
 
 Eigen::Vector3f TraceRay(const Ray& r, Hitable* scene, int depth) {

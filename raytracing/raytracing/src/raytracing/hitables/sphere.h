@@ -1,7 +1,7 @@
 #pragma once
 
 #include "hitable.h"
-#include "material.h"
+#include "raytracing/materials/material.h"
 
 class Sphere : public Hitable {
 public:
@@ -9,7 +9,7 @@ public:
 	float radius;
     Material* matPtr;
 
-	Sphere() {}
+    Sphere() = default;
 	Sphere(Eigen::Vector3f cen, float r, Material* mat) : center(cen), radius(r), matPtr(mat) {};
 	virtual bool Hit(const Ray& r, float t_min, float t_max, HitRecord& record) const;
 };
