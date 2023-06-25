@@ -5,10 +5,12 @@
 class Material;
 
 struct HitRecord {
-	float t;
+	float t = 0.f;
 	Eigen::Vector3f p;
 	Eigen::Vector3f normal;
-	Material* matPtr;
+	Material* matPtr = nullptr;
+
+	HitRecord() = default;
 };
 
 class Hitable {

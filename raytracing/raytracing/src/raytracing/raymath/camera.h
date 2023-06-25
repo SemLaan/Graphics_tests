@@ -12,7 +12,7 @@ public:
 	Eigen::Vector3f vertical;
 	Eigen::Vector3f origin;
 	Eigen::Vector3f u, v, w;
-	float lensRadius;
+	float lensRadius = 0.f;
 
 	Camera() = default;
 

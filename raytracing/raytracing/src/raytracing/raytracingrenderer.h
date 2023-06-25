@@ -3,7 +3,7 @@
 #include "utils/scenes.h"
 
 
-#define TEXTURE_CHANNELS 4
+#define TEXTURE_CHANNELS 4U
 
 void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, unsigned char* imageData, bool printProgress = false)
 {
@@ -76,7 +76,7 @@ unsigned char* RenderToArray(Hitable* scene, Camera& cam, unsigned int width, un
     std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[miliseconds]" << std::endl;
     std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "[seconds]" << std::endl;
 
-    for (int i = 0; i < numThreads; i++)
+    for (unsigned int i = 0; i < numThreads; i++)
     {
         delete threadPool[i];
     }

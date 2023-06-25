@@ -7,7 +7,7 @@ class Sphere : public Hitable {
 public:
     Eigen::Vector3f center;
 	float radius;
-    Material* matPtr;
+    Material* matPtr = nullptr;
 
     Sphere() = default;
 	Sphere(Eigen::Vector3f cen, float r, Material* mat) : center(cen), radius(r), matPtr(mat) {};

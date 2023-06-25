@@ -40,7 +40,7 @@ Hitable* RandomScene2(Camera& cam, int nx, int ny) {
 
 Hitable* RandomScene(Camera& cam, int nx, int ny) {
     int n = 500;
-    Hitable** list = new Hitable * [n + 1];
+    Hitable** list = new Hitable*[n + 1];
     list[0] = new Sphere(Eigen::Vector3f(0, -1000, 0), 1000, new Lambertian(Eigen::Vector3f(0.5, 0.5, 0.5)));
     int i = 1;
     for (int a = -11; a < 11; a++) {
