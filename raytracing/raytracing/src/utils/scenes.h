@@ -46,34 +46,34 @@ Hitable* RandomScene(Camera& cam, int nx, int ny) {
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
             float chooseMat = Random();
-            if (chooseMat < 0.4)
+            if (chooseMat < 0.4f)
                 continue;
-            Eigen::Vector3f center(a + 0.9 * Random(), 0.2, b + 0.9 * Random());
-            if ((center - Eigen::Vector3f(4, 0.2, 0)).norm() > 0.9) {
-                if (chooseMat < 0.8) { // diffuse
-                    list[i++] = new Sphere(center, 0.2,
+            Eigen::Vector3f center(a + 0.9f * Random(), 0.2f, b + 0.9f * Random());
+            if ((center - Eigen::Vector3f(4, 0.2f, 0)).norm() > 0.9f) {
+                if (chooseMat < 0.8f) { // diffuse
+                    list[i++] = new Sphere(center, 0.2f,
                         new Lambertian(Eigen::Vector3f(Random() * Random(), Random() * Random(), Random() * Random())));
                 }
-                else if (chooseMat < 0.95) { // metal
-                    list[i++] = new Sphere(center, 0.2,
-                        new Metal(Eigen::Vector3f(0.5 * (1 + Random()), 0.5 * (1 + Random()), 0.5 * (1 + Random())), 0.5 * (1 + Random())));
+                else if (chooseMat < 0.95f) { // metal
+                    list[i++] = new Sphere(center, 0.2f,
+                        new Metal(Eigen::Vector3f(0.5f * (1 + Random()), 0.5f * (1 + Random()), 0.5f * (1 + Random())), 0.5f * (1 + Random())));
                 }
                 else { // glass
-                    list[i++] = new Sphere(center, 0.2, new Dielectric(1.5));
+                    list[i++] = new Sphere(center, 0.2f, new Dielectric(1.5));
                 }
             }
         }
     }
-    list[i++] = new Sphere(Eigen::Vector3f(0, 1, 0), 1.0, new Metal(Eigen::Vector3f(0.7, 0.6, 0.5), 0));
-    list[i++] = new Sphere(Eigen::Vector3f(-4, 1, 0), 1.0, new Lambertian(Eigen::Vector3f(0.4, 0.2, 0.1)));
+    list[i++] = new Sphere(Eigen::Vector3f(0, 1, 0), 1.0f, new Metal(Eigen::Vector3f(0.7f, 0.6f, 0.5f), 0));
+    list[i++] = new Sphere(Eigen::Vector3f(-4, 1, 0), 1.0f, new Lambertian(Eigen::Vector3f(0.4f, 0.2f, 0.1f)));
     float blackHoleSize = 1.0f;
-    list[i++] = new Sphere(Eigen::Vector3f(4, 1.5, 0), blackHoleSize, new BlackHole(0.09, blackHoleSize, 1000, 0.01, 0.0008));
+    list[i++] = new Sphere(Eigen::Vector3f(4, 1.5f, 0), blackHoleSize, new BlackHole(0.09f, blackHoleSize, 1000, 0.01f, 0.0008f));
 
     // Defining the camera
     Eigen::Vector3f lookFrom(8, 2, 2);
     Eigen::Vector3f lookAt(0, 0, -1);
     float distanceToFocus = (lookFrom - lookAt).norm();
-    float aperture = 0.0;
+    float aperture = 0.0f;
     cam = Camera(lookFrom, lookAt, Eigen::Vector3f(0, 1, 0), 35, float(nx) / float(ny), aperture, distanceToFocus);
 
     return new HitableList(list, i);
