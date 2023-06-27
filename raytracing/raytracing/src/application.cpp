@@ -3,7 +3,7 @@
 #include "raytracing/raytracinginclude.h"
 #include "utils/utils.h"
 #include "utils/scenes.h"
-#include "rendering/window.h"
+#include "rendering/window/window.h"
 
 int width = 600; // width of the image
 int height = 300; // height of the image
@@ -17,11 +17,6 @@ unsigned int* imageData;
 unsigned char* dividedImage;
 int loopCounter = 0;
 
-unsigned int vb;
-unsigned int ib; 
-unsigned int va;
-unsigned int texture;
-
 
 void UpdateLoop()
 {
@@ -32,8 +27,6 @@ void UpdateLoop()
         scene = RandomScene(cam, width, height);
         imageData = new unsigned int[width * height * TEXTURE_CHANNELS];
         dividedImage = new unsigned char[width * height * TEXTURE_CHANNELS];
-
-        glGenBuffers(1, &vb);
     }
 
     RenderToArray(imageData, scene, cam, width, height, samples);
