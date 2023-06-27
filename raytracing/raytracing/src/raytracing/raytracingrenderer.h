@@ -9,7 +9,7 @@
 
 #define TEXTURE_CHANNELS 4U
 
-void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, unsigned char* imageData, bool printProgress = false)
+void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, unsigned int* imageData, bool printProgress = false)
 {
     for (int j = startRow; j < endRow; j++)
     {
@@ -34,22 +34,21 @@ void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camer
             int ib = int(255.99 * color[2]);
             // Write color data into array
             int index = ((height - j - 1) * width + i) * TEXTURE_CHANNELS;
-            imageData[index + 0] = unsigned char(ir); // R
-            imageData[index + 1] = unsigned char(ig); // G
-            imageData[index + 2] = unsigned char(ib); // B
-            imageData[index + 3] = unsigned char(255); // A
+            imageData[index + 0] += unsigned char(ir); // R
+            imageData[index + 1] += unsigned char(ig); // G
+            imageData[index + 2] += unsigned char(ib); // B
+            imageData[index + 3] += unsigned char(255); // A
         }
     }
 }
 
-unsigned char* RenderToArray(Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns)
+void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns)
 {
     unsigned int maxThreads = std::thread::hardware_concurrency();
     unsigned int numThreads = 100;
     if (numThreads > maxThreads)
         numThreads = maxThreads;
 
-    unsigned char* imageData = new unsigned char[width * height * TEXTURE_CHANNELS];
     std::thread** threadPool = new std::thread*[numThreads];
 
     std::cout << "starting with " << numThreads << " threads" << std::endl;
@@ -64,12 +63,12 @@ unsigned char* RenderToArray(Hitable* scene, Camera& cam, unsigned int width, un
             rowsForThisThread++;
         int endRow = startRow + rowsForThisThread;
         std::cout << "rows for this thread: " << endRow - startRow << std::endl;
-        threadPool[i] = new std::thread(RenderSubset, width, startRow, endRow, height, ns, &cam, scene, imageData, false);
+        threadPool[i] = new std::thread(RenderSubset, width, startRow, endRow, height, ns, &cam, scene, imgData, false);
         startRow += rowsForThisThread;
     }
 
     std::cout << "rows for this thread: " << height - startRow << std::endl;
-    RenderSubset(width, startRow, height, height, ns, &cam, scene, imageData, true);
+    RenderSubset(width, startRow, height, height, ns, &cam, scene, imgData, true);
 
     for (unsigned int i = 0; i < numThreads; i++)
     {
@@ -85,6 +84,4 @@ unsigned char* RenderToArray(Hitable* scene, Camera& cam, unsigned int width, un
         delete threadPool[i];
     }
     delete[] threadPool;
-
-    return imageData;
 }

@@ -85,5 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="Linking\lib\glfw3.lib" />
+    <Library Include="Linking\lib\glew32s.lib" />
   </ItemGroup>
 </Project>

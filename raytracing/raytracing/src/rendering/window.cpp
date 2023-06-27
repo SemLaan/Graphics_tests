@@ -7,11 +7,15 @@ namespace Renderer
         /* Initialize the library */
         glfwInit();
 
+        m_updateLoopFunc = nullptr;
+
         /* Create a windowed mode window and its OpenGL context */
         m_window = glfwCreateWindow(width, height, windowTitle, NULL, NULL);
 
         /* Make the window's context current */
         glfwMakeContextCurrent(m_window);
+
+        glewInit();
 	}
 
 
