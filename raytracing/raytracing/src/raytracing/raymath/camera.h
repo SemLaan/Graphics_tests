@@ -7,11 +7,11 @@
 
 class Camera {
 public:
-	Eigen::Vector3f lowerLeftCorner;
-	Eigen::Vector3f horizontal;
-	Eigen::Vector3f vertical;
-	Eigen::Vector3f origin;
-	Eigen::Vector3f u, v, w;
+	glm::vec3 lowerLeftCorner;
+	glm::vec3 horizontal;
+	glm::vec3 vertical;
+	glm::vec3 origin;
+	glm::vec3 u, v, w;
 	float lensRadius = 0.f;
 
 	Camera() = default;
@@ -21,7 +21,7 @@ public:
 	/// </summary>
 	/// <param name="vfov">vertical fov in degrees</param>
 	/// <param name="aspect">how many times the size of height is the width</param>
-	Camera(Eigen::Vector3f lookFrom, Eigen::Vector3f lookAt, Eigen::Vector3f vectorUp, float verticalFov, float aspect, float aperture, float focusDist) {
+	Camera(glm::vec3 lookFrom, glm::vec3 lookAt, glm::vec3 vectorUp, float verticalFov, float aspect, float aperture, float focusDist) {
 		lensRadius = aperture / 2;
 
 		// vertical fov in radians
@@ -30,9 +30,9 @@ public:
 		float halfWidth = aspect * halfHeight;
 
 		origin = lookFrom;
-		w = (lookFrom - lookAt).normalized();
-		u = (vectorUp.cross(w)).normalized();
-		v = w.cross(u);
+		w = glm::normalize(lookFrom - lookAt);
+		u = glm::normalize((glm::cross(vectorUp, w)));
+		v = glm::cross(w, u);
 
 		lowerLeftCorner = origin - halfWidth * focusDist * u - halfHeight * focusDist * v - w * focusDist;
 		horizontal = 2 * halfWidth * focusDist * u;
@@ -40,8 +40,8 @@ public:
 	}
 
 	Ray GetRay(float s, float t) {
-		Eigen::Vector3f rd = lensRadius * RandomInUnitDisk();
-		Eigen::Vector3f offset = u * rd[0] + v * rd[1];
+		glm::vec3 rd = lensRadius * RandomInUnitDisk();
+		glm::vec3 offset = u * rd[0] + v * rd[1];
 		return Ray(origin + offset, lowerLeftCorner + s * horizontal + t * vertical - origin - offset);
 	}
 };

@@ -4,14 +4,14 @@
 
 class Metal : public Material {
 public:
-	Eigen::Vector3f albedo;
+	glm::vec3 albedo;
 	float fuzz;
 
-	Metal(const Eigen::Vector3f& a, float f) : albedo(a) { if (f < 1) fuzz = f; else fuzz = 1; }
-	virtual bool Scatter(const Ray& r_in, const HitRecord& record, Eigen::Vector3f& attenuation, Ray& scattered) const {
-		Eigen::Vector3f reflected = Reflect(r_in.Direction().normalized(), record.normal);
+	Metal(const glm::vec3& a, float f) : albedo(a) { if (f < 1) fuzz = f; else fuzz = 1; }
+	virtual bool Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered) const {
+		glm::vec3 reflected = Reflect(glm::normalize(r_in.Direction()), record.normal);
 		scattered = Ray(record.p, reflected + fuzz * RandomInUnitSphere());
 		attenuation = albedo;
-		return (scattered.Direction().dot(record.normal) > 0);
+		return (glm::dot(scattered.Direction(), record.normal) > 0);
 	}
 };

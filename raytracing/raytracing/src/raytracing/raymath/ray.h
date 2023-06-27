@@ -1,16 +1,16 @@
 #pragma once
-#include <Eigen/Dense>
+#include <glm/glm.hpp>
 
 class Ray 
 {
 public:
-	Eigen::Vector3f A;
-	Eigen::Vector3f B;
+	glm::vec3 A;
+	glm::vec3 B;
 	
 	Ray() = default;
-	Ray(const Eigen::Vector3f& a, const Eigen::Vector3f& b) { A = a; B = b; }
+	Ray(const glm::vec3& a, const glm::vec3& b) { A = a; B = b; }
 
-	Eigen::Vector3f Origin() const { return A; }
-	Eigen::Vector3f Direction() const { return B; }
-	Eigen::Vector3f PointAtParameter(float t) const { return A + t * B; }
+	glm::vec3 Origin() const { return A; }
+	glm::vec3 Direction() const { return B; }
+	glm::vec3 PointAtParameter(float t) const { return A + t * B; }
 };

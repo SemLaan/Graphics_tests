@@ -17,7 +17,7 @@ void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camer
             std::cout << "progress: " << (float)(j - startRow) / (endRow - startRow) << std::endl;
         for (int i = 0; i < width; i++)
         {
-            Eigen::Vector3f color(0, 0, 0);
+            glm::vec3 color(0, 0, 0);
             for (int s = 0; s < ns; s++) {
                 float u = float(i + (((double)rand()) / RAND_MAX)) / float(width);
                 float v = float(j + (((double)rand()) / RAND_MAX)) / float(height);
@@ -28,7 +28,7 @@ void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camer
             }
 
             color /= float(ns);
-            color = Eigen::Vector3f(sqrt(color[0]), sqrt(color[1]), sqrt(color[2]));
+            color = glm::vec3(sqrt(color[0]), sqrt(color[1]), sqrt(color[2]));
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
