@@ -4,6 +4,8 @@ namespace Renderer
 {
 	Window::Window(Engine::Scene* scene, int width, int height, const char* windowTitle)
 	{
+        m_screenWidth = width;
+        m_screenHeight = height;
         /* Initialize the library */
         glfwInit();
 
@@ -47,6 +49,6 @@ namespace Renderer
     {
         m_scene->Shutdown();
         m_scene = scene;
-        m_scene->Init();
+        m_scene->Init(m_screenWidth, m_screenHeight);
     }
 }

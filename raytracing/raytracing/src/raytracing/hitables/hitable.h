@@ -10,7 +10,7 @@ struct HitRecord {
 	glm::vec3 normal;
 	Material* matPtr = nullptr;
 
-	HitRecord() = default;
+	HitRecord();
 };
 
 class Hitable {

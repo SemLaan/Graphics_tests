@@ -88,6 +88,16 @@
   <ItemGroup>
     <ClCompile Include="Linking\lib\stb.cpp" />
     <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\raytracing\hitables\hitable.cpp" />
+    <ClCompile Include="src\raytracing\hitables\hitablelist.cpp" />
+    <ClCompile Include="src\raytracing\hitables\sphere.cpp" />
+    <ClCompile Include="src\raytracing\materials\blackhole.cpp" />
+    <ClCompile Include="src\raytracing\materials\dielectric.cpp" />
+    <ClCompile Include="src\raytracing\materials\lambertian.cpp" />
+    <ClCompile Include="src\raytracing\materials\metal.cpp" />
+    <ClCompile Include="src\raytracing\raymath\camera.cpp" />
+    <ClCompile Include="src\raytracing\raymath\raytracer.cpp" />
+    <ClCompile Include="src\raytracing\raytracingrenderer.cpp" />
     <ClCompile Include="src\rendering\opengl\openglerrormanagement.cpp" />
     <ClCompile Include="src\rendering\opengl\openglrendererapi.cpp" />
     <ClCompile Include="src\rendering\opengl\openglrendererobjects.cpp" />
@@ -95,6 +105,9 @@
     <ClCompile Include="src\rendering\rendererapi\rendererapi.cpp" />
     <ClCompile Include="src\rendering\rendererapi\rendererobjects.cpp" />
     <ClCompile Include="src\rendering\window\window.cpp" />
+    <ClCompile Include="src\scene\raytracingscene.cpp" />
+    <ClCompile Include="src\utils\scenes.cpp" />
+    <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linking\include\stb\stb_image.h" />
@@ -119,6 +132,8 @@
     <ClInclude Include="src\rendering\rendererapi\rendererapi.h" />
     <ClInclude Include="src\rendering\rendererapi\rendererobjects.h" />
     <ClInclude Include="src\rendering\window\window.h" />
+    <ClInclude Include="src\scene\raytracingscene.h" />
+    <ClInclude Include="src\scene\scene.h" />
     <ClInclude Include="src\utils\scenes.h" />
     <ClInclude Include="src\utils\utils.h" />
   </ItemGroup>

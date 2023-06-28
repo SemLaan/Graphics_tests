@@ -8,9 +8,9 @@ public:
 	glm::vec3 B;
 	
 	Ray() = default;
-	Ray(const glm::vec3& a, const glm::vec3& b) { A = a; B = b; }
+	Ray(const glm::vec3& a, const glm::vec3& b) : A(a), B(b) {}
 
-	glm::vec3 Origin() const { return A; }
-	glm::vec3 Direction() const { return B; }
-	glm::vec3 PointAtParameter(float t) const { return A + t * B; }
+	inline glm::vec3 Origin() const { return A; }
+	inline glm::vec3 Direction() const { return B; }
+	inline glm::vec3 PointAtParameter(float t) const { return A + t * B; }
 };
