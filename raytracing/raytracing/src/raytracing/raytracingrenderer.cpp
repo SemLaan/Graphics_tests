@@ -37,7 +37,7 @@ namespace Raytracing
     }
 
 
-    void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns)
+    void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose)
     {
         unsigned int maxThreads = std::thread::hardware_concurrency();
         unsigned int numThreads = 100;
@@ -46,7 +46,8 @@ namespace Raytracing
 
         std::thread** threadPool = new std::thread * [numThreads];
 
-        std::cout << "starting with " << numThreads << " threads" << std::endl;
+        if (verbose)
+            std::cout << "starting with " << numThreads << " threads" << std::endl;
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
         int startRow = 0;
@@ -57,22 +58,27 @@ namespace Raytracing
             if (i < excessRows)
                 rowsForThisThread++;
             int endRow = startRow + rowsForThisThread;
-            std::cout << "rows for this thread: " << endRow - startRow << std::endl;
+            if (verbose)
+                std::cout << "rows for this thread: " << endRow - startRow << std::endl;
             threadPool[i] = new std::thread(RenderSubset, width, startRow, endRow, height, ns, &cam, scene, imgData, false);
             startRow += rowsForThisThread;
         }
 
-        std::cout << "rows for this thread: " << height - startRow << std::endl;
-        RenderSubset(width, startRow, height, height, ns, &cam, scene, imgData, true);
+        if (verbose)
+            std::cout << "rows for this thread: " << height - startRow << std::endl;
+        RenderSubset(width, startRow, height, height, ns, &cam, scene, imgData, false);
 
         for (unsigned int i = 0; i < numThreads; i++)
         {
             threadPool[i]->join();
         }
 
-        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[miliseconds]" << std::endl;
-        std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "[seconds]" << std::endl;
+        if (verbose) 
+        {
+            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+            std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[miliseconds]" << std::endl;
+            std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "[seconds]" << std::endl;
+        }
 
         for (unsigned int i = 0; i < numThreads; i++)
         {
