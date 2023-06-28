@@ -1,4 +1,4 @@
-#include "RenderCommand.h"
+#include "rendercommand.h"
 
 namespace Renderer
 {

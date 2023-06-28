@@ -1,5 +1,5 @@
-#include "OpenGLRendererAPI.h"
-#include "OpenGLErrorManagement.h"
+#include "openglrendererapi.h"
+#include "openglerrormanagement.h"
 
 #include <glew/glew.h>
 

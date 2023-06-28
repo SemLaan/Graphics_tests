@@ -1,7 +1,7 @@
-#include "RendererObjects.h"
+#include "rendererobjects.h"
 
 //Including opengl objects
-#include "rendering/opengl/OpenGLRendererObjects.h"
+#include "rendering/opengl/openglrendererobjects.h"
 
 // Other includes
 #include <fstream>

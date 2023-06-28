@@ -21,22 +21,22 @@
     <ClCompile Include="Linking\lib\stb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\opengl\OpenGLErrorManagement.cpp">
+    <ClCompile Include="src\rendering\opengl\openglerrormanagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\opengl\OpenGLRendererAPI.cpp">
+    <ClCompile Include="src\rendering\opengl\openglrendererapi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\opengl\OpenGLRendererObjects.cpp">
+    <ClCompile Include="src\rendering\opengl\openglrendererobjects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\rendererapi\RenderCommand.cpp">
+    <ClCompile Include="src\rendering\rendererapi\rendercommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\rendererapi\RendererAPI.cpp">
+    <ClCompile Include="src\rendering\rendererapi\rendererapi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\rendererapi\RendererObjects.cpp">
+    <ClCompile Include="src\rendering\rendererapi\rendererobjects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\window\window.cpp">
@@ -92,22 +92,22 @@
     <ClInclude Include="src\raytracing\raytracingrenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\opengl\OpenGLErrorManagement.h">
+    <ClInclude Include="src\rendering\opengl\openglerrormanagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\opengl\OpenGLRendererAPI.h">
+    <ClInclude Include="src\rendering\opengl\openglrendererapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\opengl\OpenGLRendererObjects.h">
+    <ClInclude Include="src\rendering\opengl\openglrendererobjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\rendererapi\RenderCommand.h">
+    <ClInclude Include="src\rendering\rendererapi\rendercommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\rendererapi\RendererAPI.h">
+    <ClInclude Include="src\rendering\rendererapi\rendererapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\rendering\rendererapi\RendererObjects.h">
+    <ClInclude Include="src\rendering\rendererapi\rendererobjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\rendering\window\window.h">

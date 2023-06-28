@@ -1,4 +1,4 @@
-#include "OpenGLErrorManagement.h"
+#include "openglerrormanagement.h"
 #include <glew/glew.h>
 #include <fstream>
 #include <iostream>

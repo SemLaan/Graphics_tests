@@ -1,5 +1,5 @@
-#include "RendererAPI.h"
-#include "rendering/opengl/OpenGLRendererAPI.h"
+#include "rendererapi.h"
+#include "rendering/opengl/openglrendererapi.h"
 
 namespace Renderer
 {

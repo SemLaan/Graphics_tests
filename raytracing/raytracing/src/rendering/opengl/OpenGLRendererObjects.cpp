@@ -1,5 +1,5 @@
-#include "OpenGLRendererObjects.h"
-#include "OpenGLErrorManagement.h"
+#include "openglrendererobjects.h"
+#include "openglerrormanagement.h"
 
 #include <glew/glew.h>
 #include <stb/stb_image.h>

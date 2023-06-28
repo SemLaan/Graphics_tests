@@ -88,12 +88,12 @@
   <ItemGroup>
     <ClCompile Include="Linking\lib\stb.cpp" />
     <ClCompile Include="src\application.cpp" />
-    <ClCompile Include="src\rendering\opengl\OpenGLErrorManagement.cpp" />
-    <ClCompile Include="src\rendering\opengl\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\rendering\opengl\OpenGLRendererObjects.cpp" />
-    <ClCompile Include="src\rendering\rendererapi\RenderCommand.cpp" />
-    <ClCompile Include="src\rendering\rendererapi\RendererAPI.cpp" />
-    <ClCompile Include="src\rendering\rendererapi\RendererObjects.cpp" />
+    <ClCompile Include="src\rendering\opengl\openglerrormanagement.cpp" />
+    <ClCompile Include="src\rendering\opengl\openglrendererapi.cpp" />
+    <ClCompile Include="src\rendering\opengl\openglrendererobjects.cpp" />
+    <ClCompile Include="src\rendering\rendererapi\rendercommand.cpp" />
+    <ClCompile Include="src\rendering\rendererapi\rendererapi.cpp" />
+    <ClCompile Include="src\rendering\rendererapi\rendererobjects.cpp" />
     <ClCompile Include="src\rendering\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -112,12 +112,12 @@
     <ClInclude Include="src\raytracing\raymath\raytracer.h" />
     <ClInclude Include="src\raytracing\hitables\sphere.h" />
     <ClInclude Include="src\raytracing\raytracingrenderer.h" />
-    <ClInclude Include="src\rendering\opengl\OpenGLErrorManagement.h" />
-    <ClInclude Include="src\rendering\opengl\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\rendering\opengl\OpenGLRendererObjects.h" />
-    <ClInclude Include="src\rendering\rendererapi\RenderCommand.h" />
-    <ClInclude Include="src\rendering\rendererapi\RendererAPI.h" />
-    <ClInclude Include="src\rendering\rendererapi\RendererObjects.h" />
+    <ClInclude Include="src\rendering\opengl\openglerrormanagement.h" />
+    <ClInclude Include="src\rendering\opengl\openglrendererapi.h" />
+    <ClInclude Include="src\rendering\opengl\openglrendererobjects.h" />
+    <ClInclude Include="src\rendering\rendererapi\rendercommand.h" />
+    <ClInclude Include="src\rendering\rendererapi\rendererapi.h" />
+    <ClInclude Include="src\rendering\rendererapi\rendererobjects.h" />
     <ClInclude Include="src\rendering\window\window.h" />
     <ClInclude Include="src\utils\scenes.h" />
     <ClInclude Include="src\utils\utils.h" />
