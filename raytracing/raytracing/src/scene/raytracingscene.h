@@ -26,6 +26,13 @@ namespace Engine
 		void Shutdown() override;
 
 	private:
+
+		// Rendering
+		std::shared_ptr<Renderer::Shader> m_shader;
+		std::shared_ptr<Renderer::Texture> m_texture;
+		std::shared_ptr<Renderer::VertexArray> m_va;
+
+		// Raytracing
 		unsigned int m_width;
 		unsigned int m_height;
 		int m_samples = 1; // samples per pixel
