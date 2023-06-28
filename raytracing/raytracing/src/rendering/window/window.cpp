@@ -1,4 +1,6 @@
 #include "window.h"
+#include "rendering/rendererapi/rendercommand.h"
+#include <iostream>
 
 namespace Renderer
 {
@@ -9,20 +11,33 @@ namespace Renderer
         /* Initialize the library */
         glfwInit();
 
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
         /* Create a windowed mode window and its OpenGL context */
         m_window = glfwCreateWindow(width, height, windowTitle, NULL, NULL);
 
         /* Make the window's context current */
         glfwMakeContextCurrent(m_window);
 
+        glfwSwapInterval(1);
+
+        std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+        std::cout << "GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+
         glewInit();
 
         m_scene = scene;
         m_scene->Init(width, height);
+        Renderer::RenderCommand::Init();
+        Renderer::RenderCommand::SetClearColor(0.5f, 0.5f, 0.5f, 0);
 	}
 
     Window::~Window()
     {
+        Renderer::RenderCommand::Shutdown();
         m_scene->Shutdown();
         glfwTerminate();
     }
@@ -33,7 +48,7 @@ namespace Renderer
         while (!glfwWindowShouldClose(m_window))
         {
             /* Render here */
-            glClear(GL_COLOR_BUFFER_BIT);
+            Renderer::RenderCommand::Clear();
 
             m_scene->Update();
             m_scene->Render();
