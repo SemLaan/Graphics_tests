@@ -144,6 +144,9 @@
     <Library Include="Linking\lib\glew32s.lib" />
     <Library Include="Linking\lib\glfw3.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\rendering\shaders\texture.shader" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
