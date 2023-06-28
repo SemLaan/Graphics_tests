@@ -1,24 +1,26 @@
 #pragma once
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
+#include "scene/scene.h"
 
 namespace Renderer
 {
-	typedef void (*callback_function)();
 
 	class Window
 	{
 	public:
 
-		Window(int width, int height, const char* windowTitle);
+		Window(Engine::Scene* scene, int width, int height, const char* windowTitle);
 		~Window();
 
-		void SetUpdateFunction(callback_function func);
+		void SetScene(Engine::Scene* scene);
 
 		void StartGameLoop();
 
 	private:
 		GLFWwindow* m_window;
-		callback_function m_updateLoopFunc;
+		Engine::Scene* m_scene;
+		unsigned int m_screenWidth;
+		unsigned int m_screenHeight;
 	};
 }

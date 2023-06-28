@@ -2,12 +2,10 @@
 
 namespace Renderer
 {
-	Window::Window(int width, int height, const char* windowTitle)
+	Window::Window(Engine::Scene* scene, int width, int height, const char* windowTitle)
 	{
         /* Initialize the library */
         glfwInit();
-
-        m_updateLoopFunc = nullptr;
 
         /* Create a windowed mode window and its OpenGL context */
         m_window = glfwCreateWindow(width, height, windowTitle, NULL, NULL);
@@ -16,8 +14,16 @@ namespace Renderer
         glfwMakeContextCurrent(m_window);
 
         glewInit();
+
+        m_scene = scene;
+        m_scene->Init(width, height);
 	}
 
+    Window::~Window()
+    {
+        m_scene->Shutdown();
+        glfwTerminate();
+    }
 
     void Window::StartGameLoop()
     {
@@ -27,7 +33,7 @@ namespace Renderer
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
 
-            m_updateLoopFunc();
+            m_scene->Update();
 
             /* Swap front and back buffers */
             glfwSwapBuffers(m_window);
@@ -37,14 +43,10 @@ namespace Renderer
         }
     }
 
-
-    Window::~Window()
+    void Window::SetScene(Engine::Scene* scene)
     {
-        glfwTerminate();
-    }
-
-    void Window::SetUpdateFunction(callback_function func)
-    {
-        m_updateLoopFunc = func;
+        m_scene->Shutdown();
+        m_scene = scene;
+        m_scene->Init();
     }
 }
