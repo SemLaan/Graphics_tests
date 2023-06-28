@@ -25,6 +25,10 @@ namespace Engine
 		m_sampleCounter++;
 	}
 
+	void RaytracingScene::Render()
+	{
+	}
+
 	void RaytracingScene::Shutdown()
 	{
 		// write image to png file

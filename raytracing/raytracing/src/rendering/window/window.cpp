@@ -36,6 +36,7 @@ namespace Renderer
             glClear(GL_COLOR_BUFFER_BIT);
 
             m_scene->Update();
+            m_scene->Render();
 
             /* Swap front and back buffers */
             glfwSwapBuffers(m_window);

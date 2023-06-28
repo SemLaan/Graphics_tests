@@ -3,6 +3,9 @@
 #include "raytracing/raytracinginclude.h"
 #include "utils/utils.h"
 #include "utils/scenes.h"
+#include "rendering/rendererapi/rendererobjects.h"
+#include "rendering/rendererapi/rendererapi.h"
+#include "rendering/rendererapi/rendercommand.h"
 
 #include <stb/stb_image_write.h>
 
@@ -19,6 +22,7 @@ namespace Engine
 		// Inherited via Scene
 		void Init(unsigned int screenWidth, unsigned int screenHeight) override;
 		void Update() override;
+		void Render() override;
 		void Shutdown() override;
 
 	private:
