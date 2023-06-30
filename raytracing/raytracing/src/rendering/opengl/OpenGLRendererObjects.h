@@ -132,6 +132,7 @@ namespace Renderer
 
 		void Bind(unsigned int slot = 0) const override;
 		void UnbindSlotZero() const override;
+		void SubTextureData(unsigned char* data) override;
 
 		void LoadImage();
 		void GenerateTexture();

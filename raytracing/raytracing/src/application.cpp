@@ -4,8 +4,8 @@
 
 int main()
 {
-    int width = 600; // width of the image
-    int height = 300; // height of the image
+    int width = 1000; // width of the image
+    int height = 500; // height of the image
 
     Engine::Scene* raytracingScene = new Engine::RaytracingScene();
     Renderer::Window* window = new Renderer::Window(raytracingScene, width, height, "beef");

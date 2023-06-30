@@ -33,13 +33,13 @@ namespace Engine
 		std::shared_ptr<Renderer::VertexArray> m_va;
 
 		// Raytracing
-		unsigned int m_width;
-		unsigned int m_height;
-		int m_samples = 1; // samples per pixel
+		unsigned int m_width = 0;
+		unsigned int m_height = 0;
+		int m_samples = 10; // samples per pixel
 		Camera m_cam;
-		Hitable* m_scene;
-		unsigned int* m_imageData;
-		unsigned char* m_dividedImage;
-		int m_sampleCounter = 0;
+		Hitable* m_scene = nullptr;
+		unsigned int* m_imageData = nullptr;
+		unsigned char* m_dividedImage = nullptr;
+		unsigned int m_sampleCounter = 0;
 	};
 }

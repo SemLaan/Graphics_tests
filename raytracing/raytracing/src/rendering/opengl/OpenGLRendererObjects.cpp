@@ -392,8 +392,23 @@ namespace Renderer
 
 	void OpenGLTexture::UnbindSlotZero() const
 	{
-		G(glActiveTexture(GL_TEXTURE0))
-			G(glBindTexture(GL_TEXTURE_2D, 0));
+		G(glActiveTexture(GL_TEXTURE0));
+		G(glBindTexture(GL_TEXTURE_2D, 0));
+	}
+
+	void OpenGLTexture::SubTextureData(unsigned char* data)
+	{
+		m_localBuffer = data;
+		Bind(0);
+		switch (m_textureFormat)
+		{
+		case TextureFormat::RGBA8:
+			G(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, m_localBuffer));
+			break;
+		case TextureFormat::R8:
+			G(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, GL_RED, GL_UNSIGNED_BYTE, m_localBuffer));
+			break;
+		}
 	}
 
 	void OpenGLTexture::LoadImage()

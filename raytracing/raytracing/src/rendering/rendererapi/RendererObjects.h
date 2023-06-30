@@ -274,6 +274,7 @@ namespace Renderer
 		/// <param name="slot"></param>
 		virtual void Bind(unsigned int slot = 0) const = 0;
 		virtual void UnbindSlotZero() const = 0;
+		virtual void SubTextureData(unsigned char* data) = 0;
 
 		virtual int GetWidth(unsigned int slot = 0) const = 0;
 		virtual int GetHeight() const = 0;

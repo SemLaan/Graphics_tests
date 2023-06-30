@@ -23,15 +23,17 @@ namespace Raytracing
 
                 color /= float(ns);
                 color = glm::vec3(sqrt(color[0]), sqrt(color[1]), sqrt(color[2]));
-                int ir = int(255.99 * color[0]);
-                int ig = int(255.99 * color[1]);
-                int ib = int(255.99 * color[2]);
+                
+                
+                unsigned int ir = unsigned int(255.99 * color[0]);
+                unsigned int ig = unsigned int(255.99 * color[1]);
+                unsigned int ib = unsigned int(255.99 * color[2]);
                 // Write color data into array
-                int index = ((height - j - 1) * width + i) * TEXTURE_CHANNELS;
-                imageData[index + 0] += unsigned char(ir); // R
-                imageData[index + 1] += unsigned char(ig); // G
-                imageData[index + 2] += unsigned char(ib); // B
-                imageData[index + 3] += unsigned char(255); // A
+                unsigned int index = ((height - j - 1) * width + i) * TEXTURE_CHANNELS;
+                imageData[index + 0] += ir; // R
+                imageData[index + 1] += ig; // G
+                imageData[index + 2] += ib; // B
+                imageData[index + 3] += 255; // A
             }
         }
     }
@@ -40,7 +42,7 @@ namespace Raytracing
     void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose)
     {
         unsigned int maxThreads = std::thread::hardware_concurrency();
-        unsigned int numThreads = 100;
+        unsigned int numThreads = 500;
         if (numThreads > maxThreads)
             numThreads = maxThreads;
 

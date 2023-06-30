@@ -14,10 +14,10 @@ namespace Engine
 
 		unsigned int vbSize = 4 * 4;
 		float* quadVertices = new float[vbSize]{
-			-1, -1, 0, 0,
-			1, -1, 1, 0,
-			-1, 1, 0, 1,
-			1, 1, 1, 1
+			-1, -1, 0, 1,
+			1, -1, 1, 1,
+			-1, 1, 0, 0,
+			1, 1, 1, 0
 		};
 
 		Renderer::VertexBufferLayout vbLayout;
@@ -38,28 +38,31 @@ namespace Engine
 		m_va->SetIndexBuffer(ib);
 
 		m_shader = Renderer::Shader::Create("src/rendering/shaders/texture.shader");
+		m_shader->SetInt("u_Texture", 1);
+
+		m_texture = Renderer::Texture::Create(m_width, m_height, Renderer::TextureFormat::RGBA8);
+		m_texture->Bind(1);
 	}
 
 	void RaytracingScene::Update()
 	{
-		/*
-		Raytracing::RenderToArray(m_imageData, m_scene, m_cam, m_width, m_height, m_samples);
-
-		for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
+		if (m_sampleCounter < 100)
 		{
-			m_dividedImage[i] = m_imageData[i] / (1 + m_sampleCounter);
+			Raytracing::RenderToArray(m_imageData, m_scene, m_cam, m_width, m_height, m_samples);
+
+			for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
+			{
+				m_dividedImage[i] = m_imageData[i] / (1U + m_sampleCounter);
+			}
+
+			m_sampleCounter++;
 		}
-		*/
-		m_sampleCounter++;
 	}
 
 	void RaytracingScene::Render()
 	{
-		// Screen frame buffer
-		Renderer::FramebufferSpecification screenFrameBufferSpecification =
-		{ 0, 0 , {Renderer::FramebufferTextureFormat::None}, true };
-		std::shared_ptr<Renderer::Framebuffer> screenFramebuffer = Renderer::Framebuffer::Create(screenFrameBufferSpecification);
-		screenFramebuffer->Bind();
+		m_texture->SubTextureData(m_dividedImage);
+		m_texture->Bind(1);
 
 		Renderer::RenderCommand::DrawIndexed(m_va, m_shader);
 	}
@@ -69,7 +72,7 @@ namespace Engine
 		// write image to png file
 		for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
 		{
-			m_dividedImage[i] = m_imageData[i] / (1 + m_sampleCounter);
+			m_dividedImage[i] = m_imageData[i] / (m_sampleCounter);
 		}
 
 		stbi_write_png("image.png", m_width, m_height, TEXTURE_CHANNELS, m_dividedImage, m_width * TEXTURE_CHANNELS);
