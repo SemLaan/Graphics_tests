@@ -106,6 +106,7 @@
     <ClCompile Include="src\rendering\rendererapi\rendererobjects.cpp" />
     <ClCompile Include="src\rendering\window\window.cpp" />
     <ClCompile Include="src\scene\raytracingscene.cpp" />
+    <ClCompile Include="src\utils\random.cpp" />
     <ClCompile Include="src\utils\scenes.cpp" />
     <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="src\rendering\window\window.h" />
     <ClInclude Include="src\scene\raytracingscene.h" />
     <ClInclude Include="src\scene\scene.h" />
+    <ClInclude Include="src\utils\random.h" />
     <ClInclude Include="src\utils\scenes.h" />
     <ClInclude Include="src\utils\utils.h" />
   </ItemGroup>

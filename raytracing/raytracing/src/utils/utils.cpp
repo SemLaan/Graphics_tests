@@ -1,27 +1,8 @@
 #include "utils.h"
+#include "glm/glm.hpp"
 
 namespace Utils
 {
-    float Random() {
-        return ((float)rand()) / RAND_MAX;
-    }
-
-    glm::vec3 RandomInUnitDisk() {
-        glm::vec3 p;
-        do {
-            p = 2.0f * glm::vec3(((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX, 0) - glm::vec3(1, 1, 0);
-        } while (glm::dot(p, p) >= 1.0);
-        return p;
-    }
-
-
-    glm::vec3 RandomOnHorizontalUnitCircle() {
-        glm::vec3 p;
-        do {
-            p = 2.0f * glm::vec3(((float)rand()) / RAND_MAX, 0, ((float)rand()) / RAND_MAX) - glm::vec3(1, 0, 1);
-        } while (glm::dot(p, p) >= 1.0);
-        return glm::normalize(p);
-    }
 
     float Schlick(float cosine, float ref_idx) {
         float r0 = (1 - ref_idx) / (1 + ref_idx);
@@ -43,13 +24,5 @@ namespace Utils
 
     glm::vec3 Reflect(const glm::vec3& v, const glm::vec3& n) {
         return v - 2 * glm::dot(v, n) * n;
-    }
-
-    glm::vec3 RandomInUnitSphere() {
-        glm::vec3 p;
-        do {
-            p = 2.0f * glm::vec3(((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX, ((float)rand()) / RAND_MAX) - glm::vec3(1, 1, 1);
-        } while (glm::length(p) >= 1.0);
-        return p;
     }
 }
