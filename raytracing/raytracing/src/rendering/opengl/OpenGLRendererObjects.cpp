@@ -522,7 +522,7 @@ namespace Renderer
 
 	OpenGLFramebuffer::~OpenGLFramebuffer()
 	{
-		for (int i = 0; i < m_attachmentCount; i++)
+		for (unsigned int i = 0; i < m_attachmentCount; i++)
 		{
 			G(glDeleteTextures(1, &m_colorAttachments[i]));
 		}

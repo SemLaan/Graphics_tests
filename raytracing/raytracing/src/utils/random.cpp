@@ -2,7 +2,7 @@
 
 namespace Utils
 {
-    float Random() {
+    float RandomFloat() {
         return ((float)rand()) / RAND_MAX;
     }
 

@@ -4,7 +4,7 @@
 namespace Utils
 {
 
-    float Random();
+    float RandomFloat();
     glm::vec3 RandomInUnitDisk();
     glm::vec3 RandomOnHorizontalUnitCircle();
     glm::vec3 RandomInUnitSphere();

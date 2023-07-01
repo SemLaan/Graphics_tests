@@ -7,16 +7,16 @@ Hitable* RandomScene2(Camera& cam, int nx, int ny) {
     list->reserve(500);
     list->push_back(new Sphere(glm::vec3(0, -1004, 0), 1000, new Lambertian(glm::vec3(0.5, 0.5, 0.5))));
     for (int i = 0; i < n; i++) {
-        float chooseMat = Utils::Random();
+        float chooseMat = Utils::RandomFloat();
         glm::vec3 random = Utils::RandomOnHorizontalUnitCircle();
-        random *= Utils::Random() * 1 + 2.5f;
+        random *= Utils::RandomFloat() * 1 + 2.5f;
         if (chooseMat < 0.8f) { // diffuse
             list->push_back(new Sphere(random, 0.2f,
-                new Lambertian(glm::vec3(Utils::Random() * Utils::Random(), Utils::Random() * Utils::Random(), Utils::Random() * Utils::Random()))));
+                new Lambertian(glm::vec3(Utils::RandomFloat() * Utils::RandomFloat(), Utils::RandomFloat() * Utils::RandomFloat(), Utils::RandomFloat() * Utils::RandomFloat()))));
         }
         else if (chooseMat < 0.95f) { // metal
             list->push_back(new Sphere(random, 0.2f,
-                new Metal(glm::vec3(0.5f * (1 + Utils::Random()), 0.5f * (1 + Utils::Random()), 0.5f * (1 + Utils::Random())), 0.5f * (1 + Utils::Random()))));
+                new Metal(glm::vec3(0.5f * (1 + Utils::RandomFloat()), 0.5f * (1 + Utils::RandomFloat()), 0.5f * (1 + Utils::RandomFloat())), 0.5f * (1 + Utils::RandomFloat()))));
         }
         else { // glass
             list->push_back(new Sphere(random, 0.2f, new Dielectric(1.5f)));
@@ -43,18 +43,18 @@ Hitable* RandomScene(Camera& cam, int nx, int ny) {
     int i = 1;
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
-            float chooseMat = Utils::Random();
+            float chooseMat = Utils::RandomFloat();
             if (chooseMat < 0.4f)
                 continue;
-            glm::vec3 center(a + 0.9f * Utils::Random(), 0.2f, b + 0.9f * Utils::Random());
+            glm::vec3 center(a + 0.9f * Utils::RandomFloat(), 0.2f, b + 0.9f * Utils::RandomFloat());
             if (glm::length(center - glm::vec3(4, 0.2f, 0)) > 0.9f) {
                 if (chooseMat < 0.8f) { // diffuse
                     list[i++] = new Sphere(center, 0.2f,
-                        new Lambertian(glm::vec3(Utils::Random() * Utils::Random(), Utils::Random() * Utils::Random(), Utils::Random() * Utils::Random())));
+                        new Lambertian(glm::vec3(Utils::RandomFloat() * Utils::RandomFloat(), Utils::RandomFloat() * Utils::RandomFloat(), Utils::RandomFloat() * Utils::RandomFloat())));
                 }
                 else if (chooseMat < 0.95f) { // metal
                     list[i++] = new Sphere(center, 0.2f,
-                        new Metal(glm::vec3(0.5f * (1 + Utils::Random()), 0.5f * (1 + Utils::Random()), 0.5f * (1 + Utils::Random())), 0.5f * (1 + Utils::Random())));
+                        new Metal(glm::vec3(0.5f * (1 + Utils::RandomFloat()), 0.5f * (1 + Utils::RandomFloat()), 0.5f * (1 + Utils::RandomFloat())), 0.5f * (1 + Utils::RandomFloat())));
                 }
                 else { // glass
                     list[i++] = new Sphere(center, 0.2f, new Dielectric(1.5));

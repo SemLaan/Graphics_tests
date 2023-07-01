@@ -52,7 +52,7 @@ namespace Engine
 
 			for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
 			{
-				m_dividedImage[i] = m_imageData[i] / (1U + m_sampleCounter);
+				m_dividedImage[i] = (unsigned char) (m_imageData[i] / (1U + m_sampleCounter) * 255);
 			}
 
 			m_sampleCounter++;
