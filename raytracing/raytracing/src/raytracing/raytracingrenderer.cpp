@@ -3,7 +3,7 @@
 namespace Raytracing
 {
 
-    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, unsigned int* imageData, bool printProgress)
+    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, float* imageData, bool printProgress)
     {
         for (int j = startRow; j < endRow; j++)
         {
@@ -22,10 +22,14 @@ namespace Raytracing
                 }
 
                 color /= float(ns);
-                color = glm::vec3(sqrt(color[0]), sqrt(color[1]), sqrt(color[2]));
-                
-                
-                unsigned int ir = unsigned int(255.99 * color[0]);
+                // Write color data into array
+                unsigned int index = ((height - j - 1) * width + i) * TEXTURE_CHANNELS;
+                imageData[index + 0] += color.x; // R
+                imageData[index + 1] += color.y; // G
+                imageData[index + 2] += color.z; // B
+                imageData[index + 3] += 1.f;
+
+                /*unsigned int ir = unsigned int(255.99 * color[0]);
                 unsigned int ig = unsigned int(255.99 * color[1]);
                 unsigned int ib = unsigned int(255.99 * color[2]);
                 // Write color data into array
@@ -33,13 +37,13 @@ namespace Raytracing
                 imageData[index + 0] += ir; // R
                 imageData[index + 1] += ig; // G
                 imageData[index + 2] += ib; // B
-                imageData[index + 3] += 255; // A
+                imageData[index + 3] += 255; // A*/
             }
         }
     }
 
 
-    void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose)
+    void RenderToArray(float* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose)
     {
         unsigned int maxThreads = std::thread::hardware_concurrency();
         unsigned int numThreads = 500;

@@ -9,7 +9,7 @@ namespace Engine
 		m_height = screenHeight;
 
 		m_scene = RandomScene(m_cam, m_width, m_height);
-		m_imageData = new unsigned int[m_width * m_height * TEXTURE_CHANNELS];
+		m_imageData = new float[m_width * m_height * TEXTURE_CHANNELS];
 		m_dividedImage = new unsigned char[m_width * m_height * TEXTURE_CHANNELS];
 
 		unsigned int vbSize = 4 * 4;

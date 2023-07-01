@@ -12,7 +12,7 @@
 namespace Raytracing
 {
 
-    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, unsigned int* imageData, bool printProgress = false);
+    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, float* imageData, bool printProgress = false);
 
-    void RenderToArray(unsigned int* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose = false);
+    void RenderToArray(float* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose = false);
 };
