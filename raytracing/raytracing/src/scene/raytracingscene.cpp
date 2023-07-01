@@ -8,7 +8,7 @@ namespace Engine
 		m_width = screenWidth;
 		m_height = screenHeight;
 
-		m_scene = RandomScene(m_cam, m_width, m_height);
+		m_scene = SimpleScene(m_cam, m_width, m_height);
 		m_imageData = new float[m_width * m_height * TEXTURE_CHANNELS];
 		m_dividedImage = new unsigned char[m_width * m_height * TEXTURE_CHANNELS];
 
@@ -46,13 +46,13 @@ namespace Engine
 
 	void RaytracingScene::Update()
 	{
-		if (m_sampleCounter < 100)
+		if (m_sampleCounter < 10000)
 		{
-			Raytracing::RenderToArray(m_imageData, m_scene, m_cam, m_width, m_height, m_samples);
+			Raytracing::RenderToArray(m_imageData, m_scene, m_cam, m_width, m_height, m_samples, m_sampleCounter);
 
 			for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
 			{
-				m_dividedImage[i] = (unsigned char) (m_imageData[i] / (1U + m_sampleCounter) * 255);
+				m_dividedImage[i] = (unsigned char) (sqrt(m_imageData[i] / (float)(1U + m_sampleCounter)) * 255.99f);
 			}
 
 			m_sampleCounter++;
@@ -72,7 +72,7 @@ namespace Engine
 		// write image to png file
 		for (unsigned int i = 0; i < m_width * m_height * TEXTURE_CHANNELS; i++)
 		{
-			m_dividedImage[i] = m_imageData[i] / (m_sampleCounter);
+			m_dividedImage[i] = (unsigned char)(sqrt(m_imageData[i] / m_sampleCounter) * 255);
 		}
 
 		stbi_write_png("image.png", m_width, m_height, TEXTURE_CHANNELS, m_dividedImage, m_width * TEXTURE_CHANNELS);

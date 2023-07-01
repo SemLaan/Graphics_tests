@@ -3,9 +3,9 @@
 
 namespace Utils
 {
-
-    float RandomFloat();
-    glm::vec3 RandomInUnitDisk();
-    glm::vec3 RandomOnHorizontalUnitCircle();
-    glm::vec3 RandomInUnitSphere();
+    uint32_t PCG_Hash(uint32_t input);
+    float RandomFloat(uint32_t& seed);
+    glm::vec3 RandomInUnitDisk(uint32_t& seed);
+    glm::vec3 RandomOnHorizontalUnitCircle(uint32_t& seed);
+    glm::vec3 RandomInUnitSphere(uint32_t& seed);
 }

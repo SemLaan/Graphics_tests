@@ -4,4 +4,4 @@
 #include "raytracing/materials/material.h"
 
 
-glm::vec3 TraceRay(const Ray& r, Hitable* scene, int depth);
+glm::vec3 TraceRay(const Ray& r, Hitable* scene, int depth, uint32_t& seed);

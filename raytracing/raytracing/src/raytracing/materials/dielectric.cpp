@@ -4,7 +4,7 @@ Dielectric::Dielectric(float ri)
 	: ref_idx(ri) 
 {}
 
-bool Dielectric::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered) const
+bool Dielectric::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered, uint32_t& seed) const
 {
 	glm::vec3 outwardNormal;
 	glm::vec3 reflected = Utils::Reflect(r_in.Direction(), record.normal);
@@ -29,7 +29,7 @@ bool Dielectric::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& at
 	else {
 		reflectProb = 1.0;
 	}
-	if (((double)rand()) / RAND_MAX < reflectProb) {
+	if (Utils::RandomFloat(seed) < reflectProb) {
 		scattered = Ray(record.p, reflected);
 	}
 	else {

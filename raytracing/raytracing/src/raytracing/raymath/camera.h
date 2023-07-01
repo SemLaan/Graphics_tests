@@ -23,5 +23,5 @@ public:
 	/// <param name="aspect">how many times the size of height is the width</param>
 	Camera(glm::vec3 lookFrom, glm::vec3 lookAt, glm::vec3 vectorUp, float verticalFov, float aspect, float aperture, float focusDist);
 
-	Ray GetRay(float s, float t);
+	Ray GetRay(float s, float t, uint32_t& seed);
 };

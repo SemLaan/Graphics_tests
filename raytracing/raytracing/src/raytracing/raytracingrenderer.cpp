@@ -3,7 +3,7 @@
 namespace Raytracing
 {
 
-    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, float* imageData, bool printProgress)
+    void RenderSubset(int width, int startRow, int endRow, int height, int ns, Camera* cam, Hitable* scene, float* imageData, uint32_t seed, bool printProgress)
     {
         for (int j = startRow; j < endRow; j++)
         {
@@ -13,12 +13,12 @@ namespace Raytracing
             {
                 glm::vec3 color(0, 0, 0);
                 for (int s = 0; s < ns; s++) {
-                    float u = float(i + (((double)rand()) / RAND_MAX)) / float(width);
-                    float v = float(j + (((double)rand()) / RAND_MAX)) / float(height);
+                    float u = float(i + Utils::RandomFloat(seed)) / float(width);
+                    float v = float(j + Utils::RandomFloat(seed)) / float(height);
 
-                    Ray r = cam->GetRay(u, v);
+                    Ray r = cam->GetRay(u, v, seed);
 
-                    color += TraceRay(r, scene, 0);
+                    color += TraceRay(r, scene, 0, seed);
                 }
 
                 color /= float(ns);
@@ -43,7 +43,7 @@ namespace Raytracing
     }
 
 
-    void RenderToArray(float* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, bool verbose)
+    void RenderToArray(float* imgData, Hitable* scene, Camera& cam, unsigned int width, unsigned int height, unsigned int ns, uint32_t seed, bool verbose)
     {
         unsigned int maxThreads = std::thread::hardware_concurrency();
         unsigned int numThreads = 500;
@@ -66,13 +66,13 @@ namespace Raytracing
             int endRow = startRow + rowsForThisThread;
             if (verbose)
                 std::cout << "rows for this thread: " << endRow - startRow << std::endl;
-            threadPool[i] = new std::thread(RenderSubset, width, startRow, endRow, height, ns, &cam, scene, imgData, false);
+            threadPool[i] = new std::thread(RenderSubset, width, startRow, endRow, height, ns, &cam, scene, imgData, seed + i, false);
             startRow += rowsForThisThread;
         }
 
         if (verbose)
             std::cout << "rows for this thread: " << height - startRow << std::endl;
-        RenderSubset(width, startRow, height, height, ns, &cam, scene, imgData, false);
+        RenderSubset(width, startRow, height, height, ns, &cam, scene, imgData, seed + 10000, false);
 
         for (unsigned int i = 0; i < numThreads; i++)
         {

@@ -4,7 +4,7 @@ BlackHole::BlackHole(float ssRad, float gravRad, int _stepAmount, float _stepSiz
 	: schwarzschildRadius(ssRad), gravityRadius(gravRad), stepAmount(_stepAmount), stepSize(_stepSize), gravityConst(_gravityConst) 
 {}
 
-bool BlackHole::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered) const {
+bool BlackHole::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered, uint32_t& seed) const {
 	glm::vec3 currentRayPos = record.p;
 	glm::vec3 currentRayDir = r_in.Direction();
 	glm::vec3 holeCenter = record.p - (record.normal * gravityRadius);

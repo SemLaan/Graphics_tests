@@ -11,10 +11,10 @@ Metal::Metal(const glm::vec3& a, float f)
 }
 
 
-bool Metal::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered) const
+bool Metal::Scatter(const Ray& r_in, const HitRecord& record, glm::vec3& attenuation, Ray& scattered, uint32_t& seed) const
 {
 	glm::vec3 reflected = Utils::Reflect(glm::normalize(r_in.Direction()), record.normal);
-	scattered = Ray(record.p, reflected + fuzz * Utils::RandomInUnitSphere());
+	scattered = Ray(record.p, reflected + fuzz * Utils::RandomInUnitSphere(seed));
 	attenuation = albedo;
 	return (glm::dot(scattered.Direction(), record.normal) > 0);
 }
